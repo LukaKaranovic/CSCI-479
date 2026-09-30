@@ -1,0 +1,292 @@
+View first 5 rows of the DataFrame to ensure it loaded correctly.
+================================================================================
+  checking_status  duration                    credit_history              purpose  ...  num_dependents own_telephone foreign_worker  Credit_Risk
+0            '<0'         6  'critical/other existing credit'             radio/tv  ...               1           yes            yes         good
+1      '0<=X<200'        48                   'existing paid'             radio/tv  ...               1          none            yes          bad
+2   'no checking'        12  'critical/other existing credit'            education  ...               2          none            yes         good
+3            '<0'        42                   'existing paid'  furniture/equipment  ...               2          none            yes         good
+4            '<0'        24              'delayed previously'            'new car'  ...               2          none            yes          bad
+
+[5 rows x 21 columns]
+
+=== Metadata Analysis ===
+
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 1000 entries, 0 to 999
+Data columns (total 21 columns):
+ #   Column                  Non-Null Count  Dtype 
+---  ------                  --------------  ----- 
+ 0   checking_status         1000 non-null   object
+ 1   duration                1000 non-null   int64 
+ 2   credit_history          1000 non-null   object
+ 3   purpose                 1000 non-null   object
+ 4   credit_amount           1000 non-null   int64 
+ 5   savings_status          1000 non-null   object
+ 6   employment              1000 non-null   object
+ 7   installment_commitment  1000 non-null   int64 
+ 8   personal_status         1000 non-null   object
+ 9   other_parties           1000 non-null   object
+ 10  residence_since         1000 non-null   int64 
+ 11  property_magnitude      1000 non-null   object
+ 12  age                     1000 non-null   int64 
+ 13  other_payment_plans     1000 non-null   object
+ 14  housing                 1000 non-null   object
+ 15  existing_credits        1000 non-null   int64 
+ 16  job                     1000 non-null   object
+ 17  num_dependents          1000 non-null   int64 
+ 18  own_telephone           1000 non-null   object
+ 19  foreign_worker          1000 non-null   object
+ 20  Credit_Risk             1000 non-null   object
+dtypes: int64(7), object(14)
+memory usage: 164.2+ KB
+================================================================================
+
+=== Missing Attribute Analysis ===
+
+# of Missing Values per Column:
+checking_status           | 0
+duration                  | 0
+credit_history            | 0
+purpose                   | 0
+credit_amount             | 0
+savings_status            | 0
+employment                | 0
+installment_commitment    | 0
+personal_status           | 0
+other_parties             | 0
+residence_since           | 0
+property_magnitude        | 0
+age                       | 0
+other_payment_plans       | 0
+housing                   | 0
+existing_credits          | 0
+job                       | 0
+num_dependents            | 0
+own_telephone             | 0
+foreign_worker            | 0
+Credit_Risk               | 0
+----------------------------------------
+Missing Percentage per Column:
+checking_status           | 0.00%
+duration                  | 0.00%
+credit_history            | 0.00%
+purpose                   | 0.00%
+credit_amount             | 0.00%
+savings_status            | 0.00%
+employment                | 0.00%
+installment_commitment    | 0.00%
+personal_status           | 0.00%
+other_parties             | 0.00%
+residence_since           | 0.00%
+property_magnitude        | 0.00%
+age                       | 0.00%
+other_payment_plans       | 0.00%
+housing                   | 0.00%
+existing_credits          | 0.00%
+job                       | 0.00%
+num_dependents            | 0.00%
+own_telephone             | 0.00%
+foreign_worker            | 0.00%
+Credit_Risk               | 0.00%
+
+=== Analyzing Categorical Attributes ===
+
+=== Attribute: checking_status ===
+Number of categories: 4
+Value                               | Frequency
+--------------------------------------------------
+'no checking'                       | 394
+'<0'                                | 274
+'0<=X<200'                          | 269
+'>=200'                             | 63
+================================================================================
+=== Attribute: credit_history ===
+Number of categories: 5
+Value                               | Frequency
+--------------------------------------------------
+'existing paid'                     | 530
+'critical/other existing credit'    | 293
+'delayed previously'                | 88
+'all paid'                          | 49
+'no credits/all paid'               | 40
+================================================================================
+=== Attribute: purpose ===
+Number of categories: 10
+Value                               | Frequency
+--------------------------------------------------
+radio/tv                            | 280
+'new car'                           | 234
+furniture/equipment                 | 181
+'used car'                          | 103
+business                            | 97
+education                           | 50
+repairs                             | 22
+'domestic appliance'                | 12
+other                               | 12
+retraining                          | 9
+================================================================================
+=== Attribute: savings_status ===
+Number of categories: 5
+Value                               | Frequency
+--------------------------------------------------
+'<100'                              | 603
+'no known savings'                  | 183
+'100<=X<500'                        | 103
+'500<=X<1000'                       | 63
+'>=1000'                            | 48
+================================================================================
+=== Attribute: employment ===
+Number of categories: 5
+Value                               | Frequency
+--------------------------------------------------
+'1<=X<4'                            | 339
+'>=7'                               | 253
+'4<=X<7'                            | 174
+'<1'                                | 172
+unemployed                          | 62
+================================================================================
+=== Attribute: personal_status ===
+Number of categories: 4
+Value                               | Frequency
+--------------------------------------------------
+'male single'                       | 548
+'female div/dep/mar'                | 310
+'male mar/wid'                      | 92
+'male div/sep'                      | 50
+================================================================================
+=== Attribute: other_parties ===
+Number of categories: 3
+Value                               | Frequency
+--------------------------------------------------
+none                                | 907
+guarantor                           | 52
+'co applicant'                      | 41
+================================================================================
+=== Attribute: property_magnitude ===
+Number of categories: 4
+Value                               | Frequency
+--------------------------------------------------
+car                                 | 332
+'real estate'                       | 282
+'life insurance'                    | 232
+'no known property'                 | 154
+================================================================================
+=== Attribute: other_payment_plans ===
+Number of categories: 3
+Value                               | Frequency
+--------------------------------------------------
+none                                | 814
+bank                                | 139
+stores                              | 47
+================================================================================
+=== Attribute: housing ===
+Number of categories: 3
+Value                               | Frequency
+--------------------------------------------------
+own                                 | 713
+rent                                | 179
+'for free'                          | 108
+================================================================================
+=== Attribute: job ===
+Number of categories: 4
+Value                               | Frequency
+--------------------------------------------------
+skilled                             | 630
+'unskilled resident'                | 200
+'high qualif/self emp/mgmt'         | 148
+'unemp/unskilled non res'           | 22
+================================================================================
+=== Attribute: own_telephone ===
+Number of categories: 2
+Value                               | Frequency
+--------------------------------------------------
+none                                | 596
+yes                                 | 404
+================================================================================
+=== Attribute: foreign_worker ===
+Number of categories: 2
+Value                               | Frequency
+--------------------------------------------------
+yes                                 | 963
+no                                  | 37
+================================================================================
+=== Attribute: Credit_Risk ===
+Number of categories: 2
+Value                               | Frequency
+--------------------------------------------------
+good                                | 700
+bad                                 | 300
+================================================================================
+
+=== Analyzing Numeric Attributes ===
+
+=== Attribute: duration ===
+Range: 68 (Min: 4, Max: 72)
+Average: 20.90
+Top 3 most frequent values:
+24         | 184
+12         | 179
+18         | 113
+================================================================================
+=== Attribute: credit_amount ===
+Range: 18174 (Min: 250, Max: 18424)
+Average: 3271.26
+Top 3 most frequent values:
+1275       | 3
+1262       | 3
+1478       | 3
+================================================================================
+=== Attribute: installment_commitment ===
+Number of categories: 4
+Value                               | Frequency
+--------------------------------------------------
+4                                   | 476
+2                                   | 231
+3                                   | 157
+1                                   | 136
+================================================================================
+=== Attribute: residence_since ===
+Number of categories: 4
+Value                               | Frequency
+--------------------------------------------------
+4                                   | 413
+2                                   | 308
+3                                   | 149
+1                                   | 130
+================================================================================
+=== Attribute: age ===
+Range: 56 (Min: 19, Max: 75)
+Average: 35.55
+Top 3 most frequent values:
+27         | 51
+26         | 50
+23         | 48
+================================================================================
+=== Attribute: existing_credits ===
+Number of categories: 4
+Value                               | Frequency
+--------------------------------------------------
+1                                   | 633
+2                                   | 333
+3                                   | 28
+4                                   | 6
+================================================================================
+=== Attribute: num_dependents ===
+Number of categories: 2
+Value                               | Frequency
+--------------------------------------------------
+1                                   | 845
+2                                   | 155
+================================================================================
+
+=== Discretization of continuous 'age' attribute ===
+
+Age Bracket     | Frequency
+--------------------------------------------------
+19-28           | 334
+29-38           | 346
+39-48           | 181
+49-58           | 85
+59-68           | 47
+69-78           | 7
+================================================================================
