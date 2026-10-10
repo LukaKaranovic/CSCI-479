@@ -28,8 +28,6 @@ Efficient Implementation:
 - Keep track of number of items under each category for S1 and S2
 - Move threshold down a number: Update existing category counts by adding/subtracts (like a rolling count)
 
-
 For threshold candidates:
 
 - Choose every possible threshold value that will partition the dataset into two sets differently
-
