@@ -56,4 +56,4 @@ pip install -r requirements.txt
 1. Navigate to the project root folder.
 2. Run the script by typing `python3 assignment1.py` in the terminal.
     * _If `python3` doesn't work, try replacing it with `py` or `python`_
-3. Analyze the outputted results in `eda_results.txt`, located in the project root folder.
+3. Analyze the outputted results in `decision_tree_output.png` and `decision_tree_confusion_matrix.png`, located in the project root folder.
