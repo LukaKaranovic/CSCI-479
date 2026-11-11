@@ -103,11 +103,22 @@ for idx, feature_name in enumerate(features):
     for c_idx, c_label in enumerate(nb_classifier.classes_):
         print(f"  Class '{c_label}':")
 
+        
         # Loop through each category value and its corresponding log-probability
         for cat_val, log_p in zip(categories, log_probs[c_idx]):
             # Use np.exp() to convert log-probability back into standard decimal (0 to 1)
             cat_prob = np.exp(log_p)
             print(f"    -> Category '{cat_val}': P = {cat_prob:.3f}")
+
+# Get Credit_Risk probabiltiies
+class_counts = y_train.value_counts()
+class_probabilities = y_train.value_counts(normalize=True)
+
+print("=== TRAINING SET CLASS DISTRIBUTION ==COUNTS & PROBABILITIES ===")
+for c_label in nb_classifier.classes_:
+    count = class_counts[c_label]
+    prob = class_probabilities[c_label]
+    print(f"Credit_Risk = '{c_label}': Count = {count}, Proportion (Probability) = {prob:.3f}")
 
 print(f"=" * 40)
 
