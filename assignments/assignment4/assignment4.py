@@ -1,3 +1,5 @@
+import os
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -126,9 +128,9 @@ if __name__ == "__main__":
                 "Init Weights": init_weights,
                 "Learning Rate": lr,
                 "Stop Condition": reason,
-                "Final w0": round(final_w[0], 4),
-                "Final w1": round(final_w[1], 4),
-                "Final w2": round(final_w[2], 4),
+                "Final w0": round(final_w[0], 2),
+                "Final w1": round(final_w[1], 2),
+                "Final w2": round(final_w[2], 2),
                 "Final SSE": round(final_sse, 4)
             })
 
@@ -140,8 +142,9 @@ if __name__ == "__main__":
 
             all_histories[f"Run {run_id}"] = {
                 "iters": iters,
+                "sses": sses,
                 "sses_capped": sses_capped,
-                "label": f"Run {run_id} (LR={lr})"
+                "label": f"Run {run_id} (weights={init_weights}) (LR={lr})"
             }
             run_id += 1
 
@@ -168,7 +171,7 @@ if __name__ == "__main__":
         print("-" * 42)
         
         for idx in valid_indices:
-            iteration, sse = val['iters'][idx], val['sses_capped'][idx]
+            iteration, sse = val['iters'][idx], val['sses'][idx]
             print(f"{iteration:<12} | {sse:<25.4f}")
 
     # ==========================================
@@ -176,9 +179,6 @@ if __name__ == "__main__":
     # ==========================================
     summary_df = pd.DataFrame(results_summary)
 
-
-
-    
     print("\n" + "="*80)
     print("MASTER SUMMARY TABLE (ALL 9 RUNS)")
     print("="*80)
@@ -189,23 +189,49 @@ if __name__ == "__main__":
     print("="*80 + "\n")
 
     # ==========================================
+    # BEST MODEL EVALUATION & PREDICTION TABLE
+    # ==========================================
+
+    best_run_row = summary_df.loc[summary_df["Final SSE"].idxmin()]
+    best_run_name = best_run_row["Run"]
+    best_weights = [best_run_row["Final w0"], best_run_row["Final w1"], best_run_row["Final w2"]]
+
+    print("\n" + "="*80)
+    print(f"BEST MODEL EVALUATION ({best_run_name} | Final SSE: {best_run_row['Final SSE']})")
+    print("="*80)
+    print(f"Optimal Weights: w0={best_weights[0]:.2f}, w1={best_weights[1]:.2f}, w2={best_weights[2]:.2f}")
+    
+    # Apply optimal weights to dataset features
+    X_b_full = np.c_[np.ones((len(y), 1)), X]
+    y_pred_best = X_b_full.dot(best_weights)
+    residuals = y - y_pred_best
+    squared_errors = residuals ** 2
+
+    # Build evaluation DataFrame
+    eval_df = df.copy()
+    eval_df["Predicted OXYCON"] = y_pred_best
+    eval_df["Residual (Actual - Pred)"] = residuals
+    eval_df["Squared Error"] = squared_errors
+
+    print(eval_df.to_string(index=False))
+    print("="*80 + "\n")
+
+    # ==========================================
     # MATPLOTLIB TRAINING VISUALIZATIONS
     # ==========================================
 
     # Plot the SSE over the number of iterations to see overall error trend for each set of initial weights and learning rate..
 
-    # Will produce 4 graphs: A graph comparing runs 1-3, a graph comparing runs 4-6, a graph comparing runs 7-9, and a final graph comparing all 9 runs together.
+    # Will produce 10 graphs in a `graphs/` subdirectory: A graph for each run, and a final graph comparing all 9 runs together.
 
-    for idx, (cat_name, _) in enumerate(init_weight_categories):
+    # Ensure output directory exists
+    output_dir = "graphs"
+    os.makedirs(output_dir, exist_ok=True)
+
+    for run_id in range(1, 10):
         plt.figure(figsize=(9, 5))
-        
-        # idx 0 -> runs 1 to 3 | idx 1 -> runs 4 to 6 | idx 2 -> runs 7 to 9
-        start_run = idx * 3 + 1
-        end_run = start_run + 3
-        
-        for run_id in range(start_run, end_run):
-            hist_data = all_histories[f"Run {run_id}"] # Extract from all_histories and plot
-            plt.plot(hist_data["iters"], hist_data["sses_capped"], label=hist_data["label"], linewidth=2)
+        hist_data = all_histories[f"Run {run_id}"] # Extract from all_histories and plot
+        plt.plot(hist_data["iters"], hist_data["sses_capped"], label=hist_data["label"], linewidth=2)
 
 
         # Log scale it so divergent errors don't dominate graph and make it hard to see the convergent ones.
@@ -218,10 +244,10 @@ if __name__ == "__main__":
         plt.tight_layout()
         
         # Save figure before showing
-        filename = f"training_group_{idx + 1}.png"
+        filename = os.path.join(output_dir,f"run_{run_id}_graph.png")
         plt.savefig(filename, dpi=300, bbox_inches='tight')
         print(f"Saved: {filename}")
-        plt.show()
+        plt.close()
 
 
     # Grand summary graph (all 9 runs)
@@ -240,6 +266,6 @@ if __name__ == "__main__":
     plt.tight_layout()
 
     # Save summary figure
-    plt.savefig("summary_all_9_runs.png", dpi=300, bbox_inches='tight')
-    print("Saved: summary_all_9_runs.png")
+    plt.savefig(os.path.join(output_dir, "summary_all_9_runs.png"), dpi=300, bbox_inches='tight')
+    print("Saved: " + os.path.join(output_dir, "summary_all_9_runs.png"))
     plt.show()

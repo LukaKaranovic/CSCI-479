@@ -2,7 +2,7 @@
 
 **Author:** Luka Karanovic
 
-**Date:** October 28, 2026
+**Date:** November 12, 2026
 
 **Environment Requirements:** Debian-compatible Linux (or any environment supporting Python 3)
 
@@ -10,10 +10,10 @@
 
 ## Submission Files Included
 
-* **`assignment3_report.pdf`** The report that compiles the results from the data exploration, decision tree building and analysis, and decision tree testing process.
-* **`assignment3.py`** A Python script containing the data preprocessing, model building, model visualization, and model testing.
-  * Note: the script will generate 2 files in the directory it is executed in: a PNG for the generated decision tree and a PNG for the confusion matrix.
-* **`requirements.txt`**  A text file listing all specific Python libraries needed to run the Python script.
+* **`assignment4_report.pdf`** The report that compiles the results from the data exploration, model training and analysis, best model results, and overall understanding of error based learning.
+* **`assignment4.py`** A Python program containing the data preprocessing, model building, training visualization, and model/training results.
+  * Note: the script will generate a subdirectory from the root of the project named `graphs/` that contains 10 graphs showing the error trend for each training run in a `.png` file format.
+* **`requirements.txt`**  A text file listing all specific Python libraries needed to run the Python program.
 
 ---
 
@@ -38,7 +38,7 @@ python3 -m venv venv
 source venv/bin/activate
 ```
 
-* _Note: Virtual environment folders can create a lot of files which can cause you to exceed the file limit quota, so be wary._
+* _Note: Virtual environment folders can create a lot of files which can cause you to exceed the file limit quota on the VIU CSCI servers, so be wary._
 
 ### 3. Install Python Dependencies
 
@@ -56,4 +56,4 @@ pip install -r requirements.txt
 1. Navigate to the project root folder.
 2. Run the script by typing `python3 assignment3.py` in the terminal.
     * _If `python3` doesn't work, try replacing it with `py` or `python`_
-3. Analyze the outputted results in `naive_bayes_confusion_matrix.png`, located in the project root folder.
+3. Analyze the outputted results in the terminal and in the `graphs/` subdirectory, located in the project root folder.
